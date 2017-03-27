@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('BUILD') {
       steps {
-        sh '''cd docker
-./BUILD-AND-RUN.sh'''
+        sh './BUILD-AND-RUN.sh'
       }
     }
     stage('TEST') {
