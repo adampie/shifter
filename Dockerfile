@@ -1,13 +1,12 @@
 # Dockerfile
-FROM php:7.1-apache
+FROM centos
 EXPOSE 8888
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
+RUN yum update -y
 
-COPY /api /var/www/html/
-RUN cd /var/www/html && ls -la
+#COPY /api /var/www/html/
 
 ADD provision.sh provision.sh
 RUN ./provision.sh
-RUN cd /var/www/html && ls -la
+
+CMD ["/bin/bash"]

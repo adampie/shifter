@@ -10,7 +10,7 @@ cleanUp(){
 
 	docker container kill adampie-shifter
 	docker container rm adampie-shifter
-	docker image rm php:7.1-apache
+	docker image rm centos
 	docker image rm adampie-shifter
 
 }
@@ -45,6 +45,6 @@ echo '#         Deploying Shifter         #'
 echo '#       http://localhost:8888       #'
 echo '#####################################'
 #docker run --name adampie-shifter -i --rm  --link adampie-postgresql -d adampie-shifter -t adampie-shifter
-docker run -d -t -i --rm --name adampie-shifter adampie-shifter
+docker run -t -i -p 8888:80 --rm --name adampie-shifter adampie-shifter
 # Remove
 trap cleanUp EXIT
