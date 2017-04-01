@@ -5,12 +5,12 @@ pipeline {
       steps {
         parallel(
           "Docker": {
-            echo 'Docker'
-
+            echo 'Creating environment with docker containers '
+            
           },
           "PostgreSQL": {
-            echo 'PostgreSQL'
-
+            sh 'docker run --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
+            
           }
         )
       }
@@ -29,6 +29,8 @@ pipeline {
   post {
     always {
       echo 'RUNNING POST'
+      
     }
+    
   }
 }
