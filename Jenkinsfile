@@ -4,11 +4,14 @@ pipeline {
     stage('Docker') {
       steps {
         parallel(
-          "Docker": {
-            echo 'Creating environment with docker containers '
+          "Shifter": {
+            sh 'docker run -t -i -p 8888:80 --rm --name adampie-shifter adampie-shifter'
           },
           "PostgreSQL": {
             sh 'docker run --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
+          },
+          "Keycloak":{
+            echo 'ADD KEYCLOAK HERE'
           }
         )
       }
@@ -21,6 +24,11 @@ pipeline {
     stage('Test') {
       steps {
         echo 'Test'
+      }
+    }
+    stage('Clean Up') {
+      steps {
+        echo 'Cleaning up docker'
       }
     }
   }
