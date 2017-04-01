@@ -46,6 +46,8 @@ pipeline {
       sh 'docker image rm adampie-shifter'
       sh 'docker image rm postgres'
       sh 'docker image rm centos'
+      sh 'docker container ls -a'
+      sh 'docker image ls -a'
     }
 
   }
