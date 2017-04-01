@@ -1,10 +1,12 @@
 # Dockerfile
-FROM centos
+FROM debian
 EXPOSE 8888
 
-RUN yum update -y
+RUN apt-get update -y
+RUN apt-get upgrade -y
 
-#COPY /api /var/www/html/
+COPY /api /var/www/api/
+COPY /app /var/www/html/
 
 ADD provision.sh provision.sh
 RUN ./provision.sh

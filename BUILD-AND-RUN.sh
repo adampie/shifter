@@ -4,13 +4,14 @@ cleanUp(){
 	echo '#            CLEANING UP            #'
 	echo '#####################################'
 	docker container kill adampie-postgresql
-	docker container rm adampie-postgresql
 	docker image rm adampie-postgresql
 	docker image rm postgres
 
+	docker container kill adampie-keycloak
+	docker image rm jboss/keycloak
+
 	docker container kill adampie-shifter
-	docker container rm adampie-shifter
-	docker image rm centos
+	docker image rm debian
 	docker image rm adampie-shifter
 
 }
