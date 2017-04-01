@@ -42,7 +42,7 @@ pipeline {
       sh 'docker container kill adampie-keycloak'
       sh 'docker image rm adampie-shifter'
       sh 'docker image rm postgres'
-      sh 'docker image rm centos'
+      sh 'docker image rm debian'
       sh 'docker image rm jboss/keycloak'
     }
 
