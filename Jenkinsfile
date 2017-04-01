@@ -7,15 +7,15 @@ pipeline {
           "Shifter": {
             sh 'docker build -t adampie-shifter .'
             sh 'docker run -i -p 8888:80 --rm --name adampie-shifter adampie-shifter'
-            
+
           },
           "PostgreSQL": {
             sh 'docker run --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
-            
+
           },
           "Keycloak": {
             echo 'ADD KEYCLOAK HERE'
-            
+
           }
         )
       }
@@ -33,9 +33,7 @@ pipeline {
     stage('Clean Up') {
       steps {
         echo 'Cleaning up docker'
-        sh '''docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker rmi $(docker images -a -q)'''
+        
       }
     }
   }
@@ -49,8 +47,8 @@ docker rmi $(docker images -a -q)'''
       sh 'docker container rm adampie-shifter'
       sh 'docker image rm centos'
       sh 'docker image rm adampie-shifter'
-      
+
     }
-    
+
   }
 }
