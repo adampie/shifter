@@ -14,7 +14,7 @@ pipeline {
 
           },
           "Keycloak": {
-            echo 'ADD KEYCLOAK HERE'
+            sh 'docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
 
           }
         )
@@ -30,24 +30,19 @@ pipeline {
         echo 'Test'
       }
     }
-    stage('Clean Up') {
+    stage('Post') {
       steps {
-        echo 'Cleaning up docker in post'
+        echo 'Cleaning up docker containers and images in post'
       }
     }
   }
   post {
     always {
-      echo  'Before'
-      sh 'docker container ls -a'
-      sh 'docker image ls -a'
-      echo 'After'
       sh 'docker container kill adampie-postgresql'
+      sh 'docker container kill adampie-keycloak'
       sh 'docker image rm adampie-shifter'
       sh 'docker image rm postgres'
       sh 'docker image rm centos'
-      sh 'docker container ls -a'
-      sh 'docker image ls -a'
     }
 
   }
