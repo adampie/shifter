@@ -38,8 +38,8 @@ pipeline {
   }
   post {
     always {
-      sh 'docker container ls -la'
-      sh 'docker image ls -la'
+      sh 'docker container ls -a'
+      sh 'docker image ls -a'
     }
 
   }
