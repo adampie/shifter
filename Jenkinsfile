@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('Docker') {
       steps {
-        echo 'Docker'
+        parallel(
+          "Docker": {
+            echo 'Docker'
+            
+          },
+          "PostgreSQL": {
+            echo 'PostgreSQL'
+            
+          }
+        )
       }
     }
     stage('Build') {
