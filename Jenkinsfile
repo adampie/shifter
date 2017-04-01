@@ -7,15 +7,15 @@ pipeline {
           "Shifter": {
             sh 'docker build -t adampie-shifter .'
             sh 'docker run -i -p 8888:80 --rm --name adampie-shifter adampie-shifter'
-            
+
           },
           "PostgreSQL": {
             sh 'docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
-            
+
           },
           "Keycloak": {
             sh 'docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
-            
+
           }
         )
       }
@@ -23,13 +23,13 @@ pipeline {
     stage('Build') {
       steps {
         parallel(
-          "Build": {
+          "Lumen": {
             sh 'echo \'composer update\''
-            
+
           },
           "VueJS": {
             sh 'echo \'npm run build\''
-            
+
           }
         )
       }
@@ -37,17 +37,17 @@ pipeline {
     stage('Test') {
       steps {
         parallel(
-          "Test": {
+          "PHP Unit": {
             sh 'echo \'PHPUnit\''
-            
+
           },
           "NPM Unit": {
             sh 'echo \'npm run unit\''
-            
+
           },
           "NPM e2e": {
             sh 'echo \'npm run e2e\''
-            
+
           }
         )
       }
@@ -66,8 +66,8 @@ pipeline {
       sh 'docker image rm postgres'
       sh 'docker image rm debian'
       sh 'docker image rm jboss/keycloak'
-      
+
     }
-    
+
   }
 }
