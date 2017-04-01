@@ -33,6 +33,9 @@ pipeline {
     stage('Clean Up') {
       steps {
         echo 'Cleaning up docker'
+        sh '''docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)'''
       }
     }
   }
