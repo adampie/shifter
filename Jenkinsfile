@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('BUILD') {
       steps {
-        sh './BUILD-AND-RUN.sh'
-        sh 'uname -a'
+        sh './BUILD-AND-RUN.sh', label: 'Test?'
+        sh 'uname -a', label: 'Test2?'
       }
     }
     stage('TEST') {
