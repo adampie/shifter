@@ -33,6 +33,12 @@ pipeline {
     stage('Clean Up') {
       steps {
         echo 'Cleaning up docker in post'
+        sh 'docker container kill adampie-postgresql'
+        sh 'docker container kill adampie-shifter'
+        sh 'docker image rm adampie-postgresql'
+        sh 'docker image rm adampie-shifter'
+        sh 'docker image rm postgres'
+        sh 'docker image rm centos'
 
       }
     }
@@ -40,11 +46,11 @@ pipeline {
   post {
     always {
       sh 'docker container kill adampie-postgresql'
-      sh 'docker image rm adampie-postgresql'
-      sh 'docker image rm postgres'
       sh 'docker container kill adampie-shifter'
-      sh 'docker image rm centos'
+      sh 'docker image rm adampie-postgresql'
       sh 'docker image rm adampie-shifter'
+      sh 'docker image rm postgres'
+      sh 'docker image rm centos'
 
     }
 
