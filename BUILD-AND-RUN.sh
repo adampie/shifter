@@ -29,7 +29,7 @@ echo '#################################################'
 echo '#####################################'
 echo '#        Deploying PostgreSQL       #'
 echo '#####################################'
-docker run --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres
+docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres
 echo 'DONE!'
 
 # Build local images - shifter
