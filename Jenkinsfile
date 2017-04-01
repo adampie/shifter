@@ -6,11 +6,11 @@ pipeline {
         parallel(
           "Docker": {
             echo 'Docker'
-            
+
           },
           "PostgreSQL": {
             echo 'PostgreSQL'
-            
+
           }
         )
       }
@@ -25,10 +25,10 @@ pipeline {
         echo 'Test'
       }
     }
-    stage('Clean up') {
-      steps {
-        echo 'Clean up'
-      }
+  }
+  post {
+    always {
+      echo 'RUNNING POST'
     }
   }
 }
