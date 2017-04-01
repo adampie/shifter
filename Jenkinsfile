@@ -10,7 +10,7 @@ pipeline {
 
           },
           "PostgreSQL": {
-            sh 'docker run --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
+            sh 'docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
 
           },
           "Keycloak": {
