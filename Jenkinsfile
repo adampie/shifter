@@ -38,8 +38,14 @@ pipeline {
   }
   post {
     always {
+      echo  'Before'
       sh 'docker container ls -a'
       sh 'docker image ls -a'
+      echo 'After'
+      sh 'docker container kill adampie-postgresql'
+      sh 'docker image rm adampie-shifter'
+      sh 'docker image rm postgres'
+      sh 'docker image rm centos'
     }
 
   }
