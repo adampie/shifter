@@ -3,13 +3,25 @@ pipeline {
   stages {
     stage('BUILD') {
       steps {
-        sh './BUILD-AND-RUN.sh', label: 'Test?'
-        sh 'uname -a', label: 'Test2?'
+        echo 'Add here',
+        }
+    }
+    stage('BUILD') {
+      steps {
+        echo 'PHP',
+        echo 'Node',
       }
     }
     stage('TEST') {
       steps {
-        echo 'ADD TESTING HERE'
+        echo 'PHP',
+        echo 'Node',
+      }
+    }
+    stage('TEST') {
+      steps {
+        echo 'PHP',
+        echo 'Node',
       }
     }
   }
