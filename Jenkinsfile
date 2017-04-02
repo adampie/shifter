@@ -6,7 +6,7 @@ pipeline {
         parallel(
           "Shifter": {
             sh 'docker build -t adampie-shifter .'
-            sh 'docker run -i -p 8888:80 --rm --name adampie-shifter adampie-shifter'
+            sh 'docker run -i -p 8080:8080 --rm --name adampie-shifter adampie-shifter'
 
           },
           "PostgreSQL": {

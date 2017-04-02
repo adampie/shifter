@@ -10,7 +10,7 @@ cleanUp(){
 	docker container kill adampie-keycloak
 	docker image rm jboss/keycloak
 
-	docker container kill adampie-shifter
+	#docker container kill adampie-shifter
 	docker image rm debian
 	docker image rm adampie-shifter
 
