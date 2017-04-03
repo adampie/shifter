@@ -1,5 +1,5 @@
 # Dockerfile
-FROM eboraas/laravel
+FROM php:7.1.3-apache
 
 EXPOSE 80
 EXPOSE 443
@@ -19,9 +19,10 @@ RUN mv composer.phar /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 
 # Code
-COPY /api /var/www/laravel
+COPY /api /var/www/api
 COPY /app /var/www/html
 
 #RUN cd /var/www/html && npm install && npm run build
+#RUN cd /var/www/html && composer install && composer update
 
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]

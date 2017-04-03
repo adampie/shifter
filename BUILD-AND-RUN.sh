@@ -11,7 +11,7 @@ cleanUp(){
 	#docker image rm jboss/keycloak
 
 	#docker container kill adampie-shifter
-	docker image rm eboraas/laravel
+	docker image rm php:7.1.3-apache
 	docker image rm adampie-shifter
 
 }
@@ -52,6 +52,6 @@ echo '#         Deploying Shifter         #'
 echo '#       http://localhost:8888       #'
 echo '#####################################'
 #docker run --name adampie-shifter -i --rm  --link adampie-postgresql -d adampie-shifter -t adampie-shifter
-docker run -t -i -p 8080:80 -p 8443:443--rm --name adampie-shifter adampie-shifter
+docker run -t -i -p 80:80 -p 443:443 --rm --name adampie-shifter adampie-shifter
 # Remove
 trap cleanUp EXIT
