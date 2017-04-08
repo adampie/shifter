@@ -33,13 +33,14 @@ COPY /api /var/www/api
 COPY /app /var/www/html
 RUN chown -R adampie:www-data /var/www
 RUN cd /var/www/api && chmod -R ug+rwx storage bootstrap
-RUN cd /var/www/html && sudo -u adampie npm install && sudo -u adampie npm run build
+RUN cd /var/www/html && npm install && npm run build
 #RUN cd /var/www/api && sudo -H -u adampie composer install
 
 COPY Caddyfile /home/adampie
 
 # Screen
 RUN cd /var/www/html && screen -S app -d -m npm run dev
+RUN cd /var/www/api && screen -S api -d -m php -S localhost:8081 -t public/
 
 CMD ["/bin/bash"]
 #CMD ["caddy","-conf=/home/adampie/Caddyfile"]

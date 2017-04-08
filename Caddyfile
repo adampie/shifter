@@ -1,4 +1,5 @@
 :80 {
   proxy / localhost:8080
   proxy /api localhost:8081
+  health_check /health
 }
