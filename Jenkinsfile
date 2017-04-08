@@ -6,16 +6,16 @@ pipeline {
         parallel(
           "Shifter": {
             sh 'docker build -t adampie-shifter .'
-            sh 'docker run -i -p 8080:8080 --rm --name adampie-shifter adampie-shifter'
-
+            sh 'docker run -i -p 80:80 --rm --name adampie-shifter -d adampie-shifter'
+            
           },
           "PostgreSQL": {
             sh 'docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
-
+            
           },
           "Keycloak": {
             sh 'docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
-
+            
           }
         )
       }
@@ -24,12 +24,16 @@ pipeline {
       steps {
         parallel(
           "Lumen": {
-            sh 'echo \'composer update\''
-
+            sh '''docker exec -t -i adampie-shifter /bin/bash
+cd /var/www/api && sudo -H -u adampie composer install
+cd /var/www/api && sudo -H -u adampie composer update'''
+            
           },
           "VueJS": {
-            sh 'echo \'npm run build\''
-
+            sh '''docker exec -t -i adampie-shifter /bin/bash
+cd /var/www/html && npm install
+cd /var/www/html && npm run build'''
+            
           }
         )
       }
@@ -38,16 +42,19 @@ pipeline {
       steps {
         parallel(
           "PHP Unit": {
-            sh 'echo \'PHPUnit\''
-
+            sh '''docker exec -t -i adampie-shifter /bin/bash
+cd /var/www/api && phpunit'''
+            
           },
           "NPM Unit": {
-            sh 'echo \'npm run unit\''
-
+            sh '''docker exec -t -i adampie-shifter /bin/bash
+cd /var/www/html && npm run unit'''
+            
           },
           "NPM e2e": {
-            sh 'echo \'npm run e2e\''
-
+            sh '''docker exec -t -i adampie-shifter /bin/bash
+cd /var/www/html && npm run e2e'''
+            
           }
         )
       }
@@ -66,8 +73,8 @@ pipeline {
       sh 'docker image rm postgres'
       sh 'docker image rm debian'
       sh 'docker image rm jboss/keycloak'
-
+      
     }
-
+    
   }
 }
