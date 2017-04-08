@@ -4,10 +4,13 @@ FROM ubuntu
 EXPOSE 80
 EXPOSE 443
 
+EXPOSE 8080
+EXPOSE 8081
+
 # Base
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install -y net-tools wget curl build-essential python-software-properties zip unzip git sudo nano screen
+RUN apt-get install -y net-tools wget curl build-essential python-software-properties zip unzip git sudo nano screen htop dos2unix
 RUN useradd -m -U adampie -G www-data -s /bin/bash
 
 # PHP
@@ -37,10 +40,8 @@ RUN cd /var/www/html && npm install && npm run build
 #RUN cd /var/www/api && sudo -H -u adampie composer install
 
 COPY Caddyfile /home/adampie
+COPY deploy.sh /home/adampie
+RUN dos2unix /home/adampie/deploy.sh
 
-# Screen
-RUN cd /var/www/html && screen -S app -d -m npm run dev
-RUN cd /var/www/api && screen -S api -d -m php -S localhost:8081 -t public/
-
-CMD ["/bin/bash"]
-#CMD ["caddy","-conf=/home/adampie/Caddyfile"]
+#CMD ["/bin/bash"]
+CMD ./home/adampie/deploy.sh && htop
