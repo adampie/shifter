@@ -2,10 +2,6 @@
 FROM ubuntu
 
 EXPOSE 80
-EXPOSE 443
-
-EXPOSE 8080
-EXPOSE 8081
 
 # Base
 RUN apt-get update -y
@@ -37,11 +33,10 @@ COPY /app /var/www/html
 RUN chown -R adampie:www-data /var/www
 RUN cd /var/www/api && chmod -R ug+rwx storage bootstrap
 RUN cd /var/www/html && npm install && npm run build
-#RUN cd /var/www/api && sudo -H -u adampie composer install
+RUN cd /var/www/api && sudo -H -u adampie composer install
 
 COPY Caddyfile /home/adampie
 COPY deploy.sh /home/adampie
 RUN dos2unix /home/adampie/deploy.sh
 
-#CMD ["/bin/bash"]
-CMD ./home/adampie/deploy.sh && htop
+CMD bash /home/adampie/deploy.sh && htop

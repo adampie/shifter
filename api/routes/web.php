@@ -11,6 +11,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
+$app->get('/api', function () use ($app) {
     return $app->version();
 });

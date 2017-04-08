@@ -3,14 +3,14 @@ cleanUp(){
 	echo '#####################################'
 	echo '#            CLEANING UP            #'
 	echo '#####################################'
-	#docker container kill adampie-postgresql
-	#docker image rm adampie-postgresql
-	#docker image rm postgres
+	docker container kill adampie-postgresql
+	docker image rm adampie-postgresql
+	docker image rm postgres
 
-	#docker container kill adampie-keycloak
-	#docker image rm jboss/keycloak
+	docker container kill adampie-keycloak
+	docker image rm jboss/keycloak
 
-	#docker container kill adampie-shifter
+	docker container kill adampie-shifter
 	docker image rm ubuntu
 	docker image rm adampie-shifter
 
@@ -24,19 +24,17 @@ echo '#   |____/|_| |_|___|_|     |_| |_____|_| \_\   #'
 echo '#                                               #'
 echo '#################################################'
 
-
-
 # Run PostgreSQL and Keycloak
 echo '#####################################'
 echo '#        Deploying PostgreSQL       #'
 echo '#####################################'
-#docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres
+docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres
 echo 'DONE!'
 
 echo '#####################################'
 echo '#        Deploying Keycloak         #'
 echo '#####################################'
-#docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak
+docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak
 echo 'DONE!'
 
 # Build local images - shifter
@@ -49,9 +47,9 @@ echo 'DONE!'
 # Run image (Will remove container on exit)
 echo '#####################################'
 echo '#         Deploying Shifter         #'
-echo '#       http://localhost:8888       #'
+echo '#        http://yourdockerip        #'
 echo '#####################################'
-#docker run --name adampie-shifter -i --rm  --link adampie-postgresql -d adampie-shifter -t adampie-shifter
-docker run -t -i -p 80:80 -p 443:443 --rm --name adampie-shifter adampie-shifter
-# Remove
+docker run -t -i -p 80:80 --rm --name adampie-shifter adampie-shifter
+
+# Clean up
 trap cleanUp EXIT
