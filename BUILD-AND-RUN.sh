@@ -11,7 +11,7 @@ cleanUp(){
 	#docker image rm jboss/keycloak
 
 	#docker container kill adampie-shifter
-	docker image rm php:7.1.3-apache
+	docker image rm ubuntu
 	docker image rm adampie-shifter
 
 }
