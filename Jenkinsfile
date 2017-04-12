@@ -24,9 +24,8 @@ pipeline {
       steps {
         parallel(
           "Lumen": {
-            sh '''docker exec -i adampie-shifter /bin/bash
-cd /var/www/api && sudo -H -u adampie composer install
-cd /var/www/api && sudo -H -u adampie composer update'''
+            sh '''docker exec adampie-shifter cd /var/www/api && sudo -H -u adampie composer install
+docker exec adampie-shifter cd /var/www/api && sudo -H -u adampie composer update'''
             
           },
           "VueJS": {
