@@ -24,13 +24,13 @@ pipeline {
       steps {
         parallel(
           "Lumen": {
-            sh '''docker exec -t -i adampie-shifter /bin/bash
+            sh '''docker exec -i adampie-shifter /bin/bash
 cd /var/www/api && sudo -H -u adampie composer install
 cd /var/www/api && sudo -H -u adampie composer update'''
             
           },
           "VueJS": {
-            sh '''docker exec -t -i adampie-shifter /bin/bash
+            sh '''docker exec -i adampie-shifter /bin/bash
 cd /var/www/html && npm install
 cd /var/www/html && npm run build'''
             
@@ -42,17 +42,17 @@ cd /var/www/html && npm run build'''
       steps {
         parallel(
           "PHP Unit": {
-            sh '''docker exec -t -i adampie-shifter /bin/bash
+            sh '''docker exec -i adampie-shifter /bin/bash
 cd /var/www/api && phpunit'''
             
           },
           "NPM Unit": {
-            sh '''docker exec -t -i adampie-shifter /bin/bash
+            sh '''docker exec -i adampie-shifter /bin/bash
 cd /var/www/html && npm run unit'''
             
           },
           "NPM e2e": {
-            sh '''docker exec -t -i adampie-shifter /bin/bash
+            sh '''docker exec -i adampie-shifter /bin/bash
 cd /var/www/html && npm run e2e'''
             
           }
