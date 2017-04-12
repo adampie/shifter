@@ -46,10 +46,6 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
           "NPM Unit": {
             sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run unit"'
             
-          },
-          "NPM e2e": {
-            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run e2e"'
-            
           }
         )
       }
