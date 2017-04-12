@@ -29,9 +29,8 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/api && sudo -H -u adampie 
             
           },
           "VueJS": {
-            sh '''docker exec -i adampie-shifter /bin/bash
-cd /var/www/html && npm install
-cd /var/www/html && npm run build'''
+            sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm install"
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
             
           }
         )
@@ -41,18 +40,15 @@ cd /var/www/html && npm run build'''
       steps {
         parallel(
           "PHP Unit": {
-            sh '''docker exec -i adampie-shifter /bin/bash
-cd /var/www/api && phpunit'''
+            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/api && phpunit"'
             
           },
           "NPM Unit": {
-            sh '''docker exec -i adampie-shifter /bin/bash
-cd /var/www/html && npm run unit'''
+            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run unit"'
             
           },
           "NPM e2e": {
-            sh '''docker exec -i adampie-shifter /bin/bash
-cd /var/www/html && npm run e2e'''
+            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run e2e"'
             
           }
         )
