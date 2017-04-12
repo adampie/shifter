@@ -67,6 +67,7 @@ cd /var/www/html && npm run e2e'''
   }
   post {
     always {
+      sh 'docker container kill adampie-shifter'
       sh 'docker container kill adampie-postgresql'
       sh 'docker container kill adampie-keycloak'
       sh 'docker image rm adampie-shifter'
