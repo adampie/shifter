@@ -6,7 +6,7 @@ EXPOSE 80
 # Base
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install -y net-tools wget curl build-essential python-software-properties zip unzip git sudo nano screen htop dos2unix
+RUN apt-get install -y net-tools wget curl build-essential python-software-properties zip unzip git sudo nano screen htop dos2unix libfontconfig
 RUN useradd -m -U adampie -G www-data -s /bin/bash
 
 # PHP
