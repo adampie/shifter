@@ -28,7 +28,7 @@ RUN mv composer.phar /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 
 # Cady
-RUN curl -fsSL https://getcaddy.com | bash -s search
+RUN curl https://getcaddy.com | bash
 RUN setcap cap_net_bind_service=+ep /usr/local/bin/caddy
 
 # Code

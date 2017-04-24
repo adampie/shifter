@@ -7,8 +7,8 @@ cleanUp(){
 	docker image rm adampie-postgresql
 	docker image rm postgres
 
-	docker container kill adampie-keycloak
-	docker image rm jboss/keycloak
+	#docker container kill adampie-keycloak
+	#docker image rm jboss/keycloak
 
 	docker container kill adampie-shifter
 	docker image rm ubuntu
@@ -31,11 +31,11 @@ echo '#####################################'
 docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres
 echo 'DONE!'
 
-echo '#####################################'
-echo '#        Deploying Keycloak         #'
-echo '#####################################'
-docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak
-echo 'DONE!'
+#echo '#####################################'
+#echo '#        Deploying Keycloak         #'
+#echo '#####################################'
+#docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak
+#echo 'DONE!'
 
 # Build local images - shifter
 echo '#####################################'
@@ -49,7 +49,7 @@ echo '#####################################'
 echo '#         Deploying Shifter         #'
 echo '#        http://yourdockerip        #'
 echo '#####################################'
-docker run -t -i -p 80:80 --rm --name adampie-shifter adampie-shifter
+docker run -t -i -p 80:80 -p 8080:8080 -p 8081:8081 --rm --name adampie-shifter adampie-shifter
 
 # Clean up
 trap cleanUp EXIT
