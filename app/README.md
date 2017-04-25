@@ -1,4 +1,4 @@
-# app
+# shifter
 
 > Shift Management Application
 
