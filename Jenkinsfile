@@ -14,7 +14,7 @@ pipeline {
             
           },
           "Keycloak": {
-            sh 'docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
+            sh '# docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
             
           }
         )
@@ -24,10 +24,12 @@ pipeline {
       steps {
         parallel(
           "Laravel": {
-            sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/api && sudo -H -u adampie composer install"
-docker exec adampie-shifter /bin/bash -c "cd /var/www/api && sudo -H -u adampie composer update"
-docker exec adampie-shifter /bin/bash -c "cd /var/www/api && sudo -H -u adampie mv .env.example .env"
-docker exec adampie-shifter /bin/bash -c "cd /var/www/api && sudo -H -u adampie php artisan key:generate"'''
+            sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie composer install"
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie composer update"
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie mv .env.example .env"
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan key:generate"
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan migrate"
+'''
             
           },
           "VueJS": {
@@ -42,7 +44,7 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
       steps {
         parallel(
           "PHP Unit": {
-            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/api && phpunit"'
+            sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && phpunit"'
             
           },
           "NPM Unit": {
