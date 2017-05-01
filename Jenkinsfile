@@ -34,7 +34,7 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie
           },
           "VueJS": {
             sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm install"
-docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
+docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run production"'''
 
           }
         )
