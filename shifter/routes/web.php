@@ -18,8 +18,15 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return redirect('/');
 });
+
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
-//Route::get('/api/v1/employee')
+
+
+Route::group(['middleware' => 'auth'], function () {
+  Route::resource('/api/v1/employee/', 'EmployeeController');
+  Route::resource('/api/v1/shift/', 'ShiftController');
+  Route::resource('/api/v1/shiftworker/', 'ShiftWorkerController');
+});
