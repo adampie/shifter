@@ -32,15 +32,15 @@ RUN curl https://getcaddy.com | bash
 RUN setcap cap_net_bind_service=+ep /usr/local/bin/caddy
 
 # Code
-COPY /api /var/www/api
-COPY /app /var/www/html
+COPY /shifter /var/www/html
 RUN chown -R adampie:www-data /var/www
-RUN cd /var/www/api && chmod -R ug+rwx storage bootstrap
-RUN cd /var/www/html && npm install && npm run build
-RUN cd /var/www/api && sudo -H -u adampie composer install
+RUN cd /var/www/html && chmod -R ug+rwx storage bootstrap
+RUN cd /var/www/html && sudo -H -u adampie composer install
+RUN cd /var/www/html && sudo -H -u adampie npm install
 
 COPY Caddyfile /home/adampie
 COPY deploy.sh /home/adampie
 RUN dos2unix /home/adampie/deploy.sh
 
 CMD bash /home/adampie/deploy.sh && htop
+# CMD bash /home/adampie/deploy.sh && bash

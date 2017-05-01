@@ -47,7 +47,7 @@ echo 'DONE!'
 # Run image (Will remove container on exit)
 echo '#####################################'
 echo '#         Deploying Shifter         #'
-echo '#        http://yourdockerip        #'
+echo '#       http://yourdockerip:80      #'
 echo '#####################################'
 docker run -t -i -p 80:80 -p 8080:8080 -p 8081:8081 --rm --name adampie-shifter adampie-shifter
 
