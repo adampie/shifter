@@ -15,11 +15,12 @@ class CreateShiftsTable extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('company_id')->references('id')->on('users');
+            $table->integer('company_id')->unsigned();
             $table->string('name');
             $table->dateTime('start');
             $table->dateTime('end');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')->on('users');
         });
     }
 

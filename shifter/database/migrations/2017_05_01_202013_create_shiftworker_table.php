@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShiftWorkersTable extends Migration
+class CreateShiftworkerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateShiftWorkersTable extends Migration
      */
     public function up()
     {
-        Schema::create('shift_workers', function (Blueprint $table) {
+        Schema::create('shiftworkers', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('company_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('employees');
+            $table->integer('employees_id')->unsigned();
+            $table->integer('company_id')->unsigned();
             $table->timestamps();
+            $table->foreign('employees_id')->references('id')->on('employees');
+            $table->foreign('company_id')->references('id')->on('users');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateShiftWorkersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shift_workers');
+          Schema::dropIfExists('shiftworkers');
     }
 }
