@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return redirect('/');
+});
+Auth::routes();
+
+Route::get('/dashboard', 'HomeController@index')->name('home');
+
+//Route::get('/api/v1/employee')

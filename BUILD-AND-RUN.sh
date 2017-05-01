@@ -49,7 +49,7 @@ echo '#####################################'
 echo '#         Deploying Shifter         #'
 echo '#       http://yourdockerip:80      #'
 echo '#####################################'
-docker run -t -i -p 80:80 -p 8080:8080 -p 8081:8081 --rm --name adampie-shifter adampie-shifter
+docker run -t -i -p 80:80 --rm --name adampie-shifter --link adampie-postgresql adampie-shifter
 
 # Clean up
 trap cleanUp EXIT
