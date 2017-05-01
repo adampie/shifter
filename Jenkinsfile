@@ -6,16 +6,16 @@ pipeline {
         parallel(
           "Shifter": {
             sh 'docker build -t adampie-shifter .'
-            sh 'docker run -d --rm -t -p 80:80 --name adampie-shifter adampie-shifter'
-            
+            sh 'docker run -d --rm -t -p 80:80 --name adampie-shifter --link adampie-postgresql adampie-shifter'
+
           },
           "PostgreSQL": {
             sh 'docker run --rm --name adampie-postgresql -e POSTGRES_PASSWORD=password123! -e POSTGRES_DB=shifter -d postgres'
-            
+
           },
           "Keycloak": {
-            sh '# docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
-            
+            sh 'docker run --rm --name adampie-keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=password123! -d jboss/keycloak'
+
           }
         )
       }
@@ -30,12 +30,12 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan key:generate"
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan migrate"
 '''
-            
+
           },
           "VueJS": {
             sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm install"
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
-            
+
           }
         )
       }
@@ -45,11 +45,11 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
         parallel(
           "PHP Unit": {
             sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && phpunit"'
-            
+
           },
           "NPM Unit": {
             sh 'docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run unit"'
-            
+
           }
         )
       }
@@ -69,8 +69,8 @@ docker exec adampie-shifter /bin/bash -c "cd /var/www/html && npm run build"'''
       sh 'docker image rm postgres'
       sh 'docker image rm ubuntu'
       sh 'docker image rm jboss/keycloak'
-      
+
     }
-    
+
   }
 }
