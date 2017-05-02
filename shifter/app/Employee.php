@@ -12,4 +12,8 @@ class Employee extends Model
     protected $fillable = [
         'company_id', 'firstname', 'lastname',
     ];
+
+    protected $hidden = [
+      'created_at', 'updated_at'
+    ];
 }

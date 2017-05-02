@@ -8,79 +8,75 @@ use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return \Response::json(Shift::where('company_id',Auth::user()->id)->get());
+      $shifts = Shift::where('company_id',Auth::user()->id)->get();
+
+      foreach($shifts as $shift) {
+         $result[] = array(
+           "id" => $shift->id,
+           "company_id" => $shift->company_id,
+           "name" => $shift->name,
+           "start" => $shift->start,
+           "end" => $shift->end,
+           "links" => [
+              "rel" => "self",
+              "href" =>"http://localhost/api/v1/shift/".$shift->id,
+             ]
+         );
+      }
+      json_encode($result);
+      return response()->json($result);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($name, $start, $end)
     {
-        //
+        $shift = new Shift;
+        $shift->name = $name;
+        $shift->start = $start;
+        $shift->end = $end;
+        $shift->company_id = Auth::user()->id;
+        $shift->save();
+        return response()->json(201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function read($id)
     {
-        //
+      $shifts = Shift::where([
+        ['company_id',Auth::user()->id],
+        ['id',$id],
+      ])->get();
+      foreach($shifts as $shift) {
+         $result[] = array(
+           "id" => $shift->id,
+           "company_id" => $shift->company_id,
+           "name" => $shift->name,
+           "start" => $shift->start,
+           "end" => $shift->end,
+           "links" => [
+              "rel" => "self",
+              "href" =>"http://localhost/api/v1/shift/".$shift->id,
+             ]
+         );
+      }
+      json_encode($result);
+      return response()->json($result);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update($id, $name, $start, $end)
     {
-        //
+      $shift = Shift::find($id);
+      $shift->name = $name;
+      $shift->start = $start;
+      $shift->end = $end;
+      $shift->save();
+      return response()->json(200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      $shift = Shift::find($id);
+      $shift->delete();
+      return response()->json(200);
     }
 }

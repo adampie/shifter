@@ -8,79 +8,71 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return \Response::json(Employee::where('company_id',Auth::user()->id)->get());
+      $employees = Employee::where('company_id',Auth::user()->id)->get();
+
+      foreach($employees as $employee) {
+         $result[] = array(
+           "id" => $employee->id,
+           "company_id" => $employee->company_id,
+           "firstname" => $employee->firstname,
+           "lastname" => $employee->lastname,
+           "links" => [
+              "rel" => "self",
+              "href" =>"http://localhost/api/v1/employee/".$employee->id,
+             ]
+         );
+      }
+      json_encode($result);
+      return response()->json($result);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($firstname, $lastname)
     {
-        //
+        $employee = new Employee;
+        $employee->firstname = $firstname;
+        $employee->lastname = $lastname;
+        $employee->company_id = Auth::user()->id;
+        $employee->save();
+        return response()->json(201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function read($id)
     {
-        //
+      $employees = Employee::where([
+        ['company_id',Auth::user()->id],
+        ['id',$id],
+      ])->get();
+      foreach($employees as $employee) {
+         $result[] = array(
+           "id" => $employee->id,
+           "company_id" => $employee->company_id,
+           "firstname" => $employee->firstname,
+           "lastname" => $employee->lastname,
+           "links" => [
+              "rel" => "self",
+              "href" =>"http://localhost/api/v1/employee/".$employee->id,
+             ]
+         );
+      }
+      json_encode($result);
+      return response()->json($result);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update($id, $firstname, $lastname)
     {
-        //
+      $employee = Employee::find($id);
+      $employee->firstname = $firstname;
+      $employee->lastname = $lastname;
+      $employee->save();
+      return response()->json(200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      $employee = Employee::find($id);
+      $employee->delete();
+      return response()->json(200);
     }
 }

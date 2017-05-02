@@ -10,6 +10,10 @@ class ShiftWorker extends Model
     protected $table = 'shiftworkers';
 
     protected $fillable = [
-        'company_id', 'employees_id',
+        'company_id', 'employee_id', 'shift_id'
+    ];
+
+    protected $hidden = [
+      'created_at', 'updated_at'
     ];
 }

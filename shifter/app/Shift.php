@@ -12,4 +12,8 @@ class Shift extends Model
     protected $fillable = [
         'company_id', 'name', 'start', 'end',
     ];
+
+    protected $hidden = [
+      'created_at', 'updated_at'
+    ];
 }

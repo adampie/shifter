@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+import VueLoop from 'vue-loop'
 
 window.Vue = require('vue');
 
@@ -16,6 +17,9 @@ window.Vue = require('vue');
  */
 
 Vue.component('dashboard', require('./components/Dashboard.vue'));
+Vue.component('shifts', require('./components/Shifts.vue'));
+Vue.component('onshift', require('./components/Onshift.vue'));
+Vue.component('employees', require('./components/Employees.vue'));
 
 const app = new Vue({
     el: '#app'
