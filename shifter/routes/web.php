@@ -23,8 +23,6 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
-
-
 Route::group(['middleware' => 'auth'], function () {
   Route::resource('/api/v1/employee/', 'EmployeeController');
   Route::resource('/api/v1/shift/', 'ShiftController');
