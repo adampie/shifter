@@ -42,3 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/api/v1/shiftworker/{id}/{shift}/{worker}', 'ShiftController@Update');
   Route::post('/api/v1/shiftworker/{id}', 'ShiftController@Delete');
 });
+
+// https://github.com/mzabriskie/axios
+// http://vue-chartjs.org/#/home?id=introduction
+// https://v4-alpha.getbootstrap.com/components/buttons/
+// https://vuejs.org/v2/guide/single-file-components.html
