@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-import VueLoop from 'vue-loop'
 
 window.Vue = require('vue');
 
