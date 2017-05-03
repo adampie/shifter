@@ -1,7 +1,7 @@
 <template>
   <div class="panel panel-default">
       <div class="panel-heading">Shifts
-        <a href="#" class="btn pull-right btn-xs btn-primary"><span class="glyphicon glyphicon-align-justify"></span></a>
+        <a href="#" class="btn pull-right btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
       </div>
       <div class="panel-body">
           <monday :height="96"></monday>

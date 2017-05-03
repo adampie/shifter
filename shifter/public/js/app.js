@@ -2013,12 +2013,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      list: 'Hello Pagekit!'
+      employees: [{
+        id: '1',
+        name: 'test'
+      }, {
+        id: '2',
+        name: 'test2'
+      }]
+      //employees: this.readEmployees()
     };
+  },
+
+
+  methods: {
+    createEmployee: function createEmployee() {
+      axios.post('/api/v1/employee/adam/pie');
+    },
+    readEmployees: function readEmployees() {
+      var employees = axios.get('/api/v1/employee');
+      if (employees.length != 0) {
+        //RETURN ARRAY HERE
+        return employees.length;
+      }
+    },
+    updateEmployee: function updateEmployee() {
+      axios.post('/api/v1/employee/1/a/p');
+    },
+    deleteEmployee: function deleteEmployee() {
+      axios.post('/api/v1/employee/1');
+    }
   }
 });
 
@@ -4608,7 +4637,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 38 */
@@ -32334,7 +32363,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [_vm._v("\n    " + _vm._s(_vm.list) + "\n  ")])])
+  }, _vm._l((_vm.employees), function(employee) {
+    return _c('div', [_vm._v("\n     " + _vm._s(employee.name) + "\n    ")])
+  }))])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading"
@@ -32344,7 +32375,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_c('span', {
-    staticClass: "glyphicon glyphicon-align-justify"
+    staticClass: "glyphicon glyphicon-plus"
   })])])
 }]}
 module.exports.render._withStripped = true
@@ -32372,7 +32403,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_c('span', {
-    staticClass: "glyphicon glyphicon-align-justify"
+    staticClass: "glyphicon glyphicon-plus"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('div', {
@@ -32485,7 +32516,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_c('span', {
-    staticClass: "glyphicon glyphicon-align-justify"
+    staticClass: "glyphicon glyphicon-plus"
   })])])
 }]}
 module.exports.render._withStripped = true
