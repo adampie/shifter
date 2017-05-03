@@ -26,7 +26,7 @@ pipeline {
           "Laravel": {
             sh '''docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie composer install"
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie composer update"
-docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie mv .env.example .env"
+docker exec adampie-shifter /bin/bash -c "sudo -H -u adampie mv /var/www/html/.env.example /var/www/html/.env"
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan key:generate"
 docker exec adampie-shifter /bin/bash -c "cd /var/www/html && sudo -H -u adampie php artisan migrate"
 '''
