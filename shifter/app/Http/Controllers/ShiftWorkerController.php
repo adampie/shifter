@@ -7,15 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShiftWorkerController extends Controller
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Shift;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-class ShiftController extends Controller
 {
     public function index()
     {
