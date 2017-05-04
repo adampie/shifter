@@ -31,9 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/api/v1/employee/{id}', 'EmployeeController@Delete');
 
   Route::get('/api/v1/shift', 'ShiftController@Index');
-  Route::post('/api/v1/shift/{name}/{start}/{end}', 'ShiftController@Create');
+  Route::post('/api/v1/shift/{day}/{start}/{end}', 'ShiftController@Create');
   Route::get('/api/v1/shift/{id}', 'ShiftController@Read');
-  Route::post('/api/v1/shift/{id}/{name}/{start}/{end}', 'ShiftController@Update');
+  Route::post('/api/v1/shift/{id}/{day}/{start}/{end}', 'ShiftController@Update');
   Route::post('/api/v1/shift/{id}', 'ShiftController@Delete');
 
   Route::get('/api/v1/shiftworker', 'ShiftController@Index');

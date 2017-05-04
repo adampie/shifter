@@ -16,7 +16,7 @@ class ShiftController extends Controller
          $result[] = array(
            "id" => $shift->id,
            "company_id" => $shift->company_id,
-           "name" => $shift->name,
+           "day" => $shift->day,
            "start" => $shift->start,
            "end" => $shift->end,
            "links" => [
@@ -29,10 +29,10 @@ class ShiftController extends Controller
       return response()->json($result);
     }
 
-    public function create($name, $start, $end)
+    public function create($day, $start, $end)
     {
         $shift = new Shift;
-        $shift->name = $name;
+        $shift->day = $day;
         $shift->start = $start;
         $shift->end = $end;
         $shift->company_id = Auth::user()->id;
@@ -50,7 +50,7 @@ class ShiftController extends Controller
          $result[] = array(
            "id" => $shift->id,
            "company_id" => $shift->company_id,
-           "name" => $shift->name,
+           "day" => $shift->day,
            "start" => $shift->start,
            "end" => $shift->end,
            "links" => [
@@ -66,7 +66,7 @@ class ShiftController extends Controller
     public function update($id, $name, $start, $end)
     {
       $shift = Shift::find($id);
-      $shift->name = $name;
+      $shift->day = $day;
       $shift->start = $start;
       $shift->end = $end;
       $shift->save();

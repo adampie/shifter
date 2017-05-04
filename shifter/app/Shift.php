@@ -10,7 +10,7 @@ class Shift extends Model
     protected $table = 'shifts';
 
     protected $fillable = [
-        'company_id', 'name', 'start', 'end',
+        'company_id', 'day', 'start', 'end',
     ];
 
     protected $hidden = [

@@ -2015,46 +2015,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      employees: [{
-        id: '1',
-        name: 'test'
-      }, {
-        id: '2',
-        name: 'test2'
-      }]
-      //employees: this.readEmployees()
+      employees: [],
+      fname: "",
+      lname: ""
     };
+  },
+  mounted: function mounted() {
+    this.readEmployees();
   },
 
 
   methods: {
-    createEmployee: function createEmployee() {
-      axios.post('/api/v1/employee/adam/pie');
+    createEmployee: function createEmployee(fname, lname) {
+      axios.post('/api/v1/employee/' + fname + '/' + lname);
+      this.readEmployees();
     },
     readEmployees: function readEmployees() {
-      var employees = axios.get('/api/v1/employee');
-      if (employees.length != 0) {
-        //RETURN ARRAY HERE
-        return employees.length;
-      }
+      var _this = this;
+
+      axios.get('/api/v1/employee').then(function (response) {
+        if (response.data.length != 0) {
+          _this.employees = response.data;
+        }
+      });
     },
-    updateEmployee: function updateEmployee() {
-      axios.post('/api/v1/employee/1/a/p');
+
+    updateEmployee: function updateEmployee(id, fname, lname) {
+      axios.post('/api/v1/employee/' + id + '/' + fname + '/' + lname);
+      this.readEmployees();
     },
-    deleteEmployee: function deleteEmployee() {
-      axios.post('/api/v1/employee/1');
+    deleteEmployee: function deleteEmployee(id) {
+      console.log("id = " + id);
+      axios.post('/api/v1/employee/' + id);
+      this.readEmployees();
     }
   }
 });
 
 /***/ }),
 /* 33 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -2067,39 +2118,135 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      shiftworkers: []
+    };
+  },
+  mounted: function mounted() {
+    this.readShiftWorkers();
+  },
+
+
+  methods: {
+    createShiftWorkers: function createShiftWorkers() {
+      axios.post('/api/v1/shiftworker/adam/pie');
+    },
+    readShiftWorkers: function readShiftWorkers() {
+      var _this = this;
+
+      axios.get('/api/v1/shiftworker').then(function (response) {
+        if (response.data.length != 0) {
+          _this.shiftworkers = response.data;
+        }
+      });
+    },
+    updateShiftWorkers: function updateShiftWorkers() {
+      axios.post('/api/v1/shiftworker/1/a/p');
+    },
+    deleteShiftWorkers: function deleteShiftWorkers() {
+      axios.post('/api/v1/shiftworker/1');
+    }
+  }
+});
 
 /***/ }),
 /* 34 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2118,91 +2265,383 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-Vue.component('monday', {
-  extends: VueChartJs.Bar,
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      shifts: [],
+      day: null,
+      start: null,
+      end: null
+    };
+  },
   mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Monday',
-        backgroundColor: '#129762',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('tuesday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Tuesday',
-        backgroundColor: '#5a0f46',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('wednesday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Wednesday',
-        backgroundColor: '#6988e6',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('thursday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Thursday',
-        backgroundColor: '#1c118e',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('friday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Friday',
-        backgroundColor: '#b57238',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('saturday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Saturday',
-        backgroundColor: '#6917fb',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
-  }
-}), Vue.component('sunday', {
-  extends: VueChartJs.Bar,
-  mounted: function mounted() {
-    this.renderChart({
-      labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-      datasets: [{
-        label: 'Sunday',
-        backgroundColor: '#2f5674',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
+    this.readShifts(), this.drawCharts();
+  },
+
+
+  methods: {
+    createShifts: function createShifts(day, start, end) {
+      var day;
+      switch (day) {
+        case "Monday":
+          day = 0;
+          break;
+        case "Tuesday":
+          day = 1;
+          break;
+        case "Wednesday":
+          day = 2;
+          break;
+        case "Thursday":
+          day = 3;
+          break;
+        case "Friday":
+          day = 4;
+          break;
+        case "Saturday":
+          day = 5;
+          break;
+        case "Sunday":
+          day = 6;
+          break;
+      }
+      axios.post('/api/v1/shift/' + day + '/' + start + '/' + end);
+      this.readShifts();
+    },
+    readShifts: function readShifts() {
+      var _this = this;
+
+      axios.get('/api/v1/shift').then(function (response) {
+        if (response.data.length != 0) {
+          _this.shifts = response.data;
+          _this.drawCharts(response.data, response.data.length);
+        }
+      });
+    },
+    updateShifts: function updateShifts() {
+      axios.post('/api/v1/shift/1/6/12');
+    },
+
+    deleteShifts: function deleteShifts() {
+      axios.post('/api/v1/shift/1');
+      this.readShifts();
+    },
+    drawCharts: function drawCharts(arr, length) {
+      for (var i = 0; i < length; i++) {
+        switch (arr[i].day) {
+          case 0:
+            this.monday(arr[i]);
+            break;
+          case 1:
+            this.tuesday(arr[i]);
+            break;
+          case 2:
+            this.wednesday(arr[i]);
+            break;
+          case 3:
+            this.thursday(arr[i]);
+            break;
+          case 4:
+            this.friday(arr[i]);
+            break;
+          case 5:
+            this.saturday(arr[i]);
+            break;
+          case 6:
+            this.sunday(arr[i]);
+            break;
+        }
+      }
+    },
+    monday: function monday(arr) {
+      var canvas = document.getElementById("mon");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Monday",
+          data: hours
+        }] };
+
+      var mondayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+
+    tuesday: function tuesday(arr) {
+      var canvas = document.getElementById("tue");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Tuesday",
+          data: hours
+        }] };
+
+      var tuesdayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+    wednesday: function wednesday(arr) {
+      var canvas = document.getElementById("wed");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Wednesday",
+          data: hours
+        }] };
+
+      var wednesdayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+    thursday: function thursday(arr) {
+      var canvas = document.getElementById("thur");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Thursday",
+          data: hours
+        }] };
+
+      var thursdayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+
+    friday: function friday(arr) {
+      var canvas = document.getElementById("fri");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Friday",
+          data: hours
+        }] };
+
+      var fridayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+
+    saturday: function saturday(arr) {
+      var canvas = document.getElementById("sat");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Saturday",
+          data: hours
+        }] };
+
+      var saturdayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    },
+
+    sunday: function sunday(arr) {
+      var canvas = document.getElementById("sun");
+      var ctx = canvas.getContext("2d");
+
+      var hours = [];
+      for (var i = 0; i < 25; i++) {
+        if (i >= arr.start && i <= arr.end) {
+          hours.push(1);
+        } else {
+          hours.push(0);
+        }
+      }
+
+      var data = {
+        labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+        datasets: [{
+          label: "Sunday",
+          data: hours
+        }] };
+
+      var sundayChart = new Chart(ctx, {
+        type: "bar",
+        data: data
+      });
+    }
   }
 });
+
+// Vue.component('monday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Monday',
+//           backgroundColor: '#129762',
+//           data: this.monday()
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// })
+// ,
+// Vue.component('tuesday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Tuesday',
+//           backgroundColor: '#5a0f46',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// }),
+// Vue.component('wednesday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Wednesday',
+//           backgroundColor: '#6988e6',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// }),
+// Vue.component('thursday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Thursday',
+//           backgroundColor: '#1c118e',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// }),
+// Vue.component('friday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Friday',
+//           backgroundColor: '#b57238',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// }),
+// Vue.component('saturday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Saturday',
+//           backgroundColor: '#6917fb',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// }),
+// Vue.component('sunday', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+//       datasets: [
+//         {
+//           label: 'Sunday',
+//           backgroundColor: '#2f5674',
+//           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// })
 
 /***/ }),
 /* 35 */
@@ -4637,14 +5076,14 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 39 */
@@ -4658,7 +5097,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 41 */
@@ -32361,22 +32800,136 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel panel-default"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, _vm._l((_vm.employees), function(employee) {
-    return _c('div', [_vm._v("\n     " + _vm._s(employee.name) + "\n    ")])
-  }))])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Employees\n      "), _c('a', {
+  }, [_vm._v("Employees\n        "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "addEmployee",
+      "role": "dialog"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog"
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "fname"
+    }
+  }, [_vm._v("First Name:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fname),
+      expression: "fname"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "fname"
+    },
+    domProps: {
+      "value": (_vm.fname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fname = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "text"
+    }
+  }, [_vm._v("Last Name:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.lname),
+      expression: "lname"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "lname"
+    },
+    domProps: {
+      "value": (_vm.lname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.lname = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary btn-danger",
+    attrs: {
+      "href": "/dashboard",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Cancel")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-primary btn-success",
+    attrs: {
+      "data-dismiss": "modal",
+      "href": "/dashboard"
+    },
+    on: {
+      "click": function($event) {
+        _vm.createEmployee(_vm.fname, _vm.lname)
+      }
+    }
+  }, [_vm._v("Add Employee")])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('table', {
+    staticClass: "table"
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.employees), function(employee) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(employee.firstname) + " " + _vm._s(employee.lastname))]), _vm._v(" "), _c('td', [_c('a', {
+      staticClass: "btn pull-right btn-xs btn-danger",
+      attrs: {
+        "href": "/dashboard"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deleteEmployee(employee.id)
+        }
+      }
+    }, [_c('span', {
+      staticClass: "glyphicon glyphicon-remove"
+    })])])])
+  }))])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     staticClass: "btn pull-right btn-xs btn-primary",
     attrs: {
-      "href": "#"
+      "data-toggle": "modal",
+      "href": "#addEmployee"
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-plus"
-  })])])
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add Employee")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Name")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -32406,35 +32959,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "glyphicon glyphicon-plus"
   })])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  }, [_c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "height": "50px"
-    }
-  }), _vm._v(" "), _c('hr')])])
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -32476,48 +33001,188 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel panel-default"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('monday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('tuesday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('wednesday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('thursday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('friday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('saturday', {
-    attrs: {
-      "height": 96
-    }
-  }), _vm._v(" "), _c('sunday', {
-    attrs: {
-      "height": 96
-    }
-  })], 1)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Shifts\n      "), _c('a', {
+  }, [_vm._v("Shifts\n        "), _vm._m(0), _vm._v(" "), _c('a', {
+    staticClass: "btn pull-right btn-xs btn-danger",
+    attrs: {
+      "href": "/dashboard"
+    },
+    on: {
+      "click": function($event) {
+        _vm.deleteShifts()
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-remove"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "addShift",
+      "role": "dialog"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog"
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "fname"
+    }
+  }, [_vm._v("Day:")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.day),
+      expression: "day"
+    }],
+    staticClass: "selectpicker",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.day = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', [_vm._v("Monday")]), _vm._v(" "), _c('option', [_vm._v("Tuesday")]), _vm._v(" "), _c('option', [_vm._v("Wednesday")]), _vm._v(" "), _c('option', [_vm._v("Thursday")]), _vm._v(" "), _c('option', [_vm._v("Friday")]), _vm._v(" "), _c('option', [_vm._v("Saturday")]), _vm._v(" "), _c('option', [_vm._v("Sunday")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "text"
+    }
+  }, [_vm._v("Start Time:")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.start),
+      expression: "start"
+    }],
+    staticClass: "selectpicker",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.start = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', [_vm._v("00")]), _vm._v(" "), _c('option', [_vm._v("01")]), _vm._v(" "), _c('option', [_vm._v("02")]), _vm._v(" "), _c('option', [_vm._v("03")]), _vm._v(" "), _c('option', [_vm._v("04")]), _vm._v(" "), _c('option', [_vm._v("05")]), _vm._v(" "), _c('option', [_vm._v("06")]), _vm._v(" "), _c('option', [_vm._v("07")]), _vm._v(" "), _c('option', [_vm._v("08")]), _vm._v(" "), _c('option', [_vm._v("09")]), _vm._v(" "), _c('option', [_vm._v("10")]), _vm._v(" "), _c('option', [_vm._v("11")]), _vm._v(" "), _c('option', [_vm._v("12")]), _vm._v(" "), _c('option', [_vm._v("13")]), _vm._v(" "), _c('option', [_vm._v("14")]), _vm._v(" "), _c('option', [_vm._v("15")]), _vm._v(" "), _c('option', [_vm._v("16")]), _vm._v(" "), _c('option', [_vm._v("17")]), _vm._v(" "), _c('option', [_vm._v("18")]), _vm._v(" "), _c('option', [_vm._v("19")]), _vm._v(" "), _c('option', [_vm._v("20")]), _vm._v(" "), _c('option', [_vm._v("21")]), _vm._v(" "), _c('option', [_vm._v("22")]), _vm._v(" "), _c('option', [_vm._v("23")]), _vm._v(" "), _c('option', [_vm._v("24")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "fname"
+    }
+  }, [_vm._v("End Time:")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.end),
+      expression: "end"
+    }],
+    staticClass: "selectpicker",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.end = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', [_vm._v("00")]), _vm._v(" "), _c('option', [_vm._v("01")]), _vm._v(" "), _c('option', [_vm._v("02")]), _vm._v(" "), _c('option', [_vm._v("03")]), _vm._v(" "), _c('option', [_vm._v("04")]), _vm._v(" "), _c('option', [_vm._v("05")]), _vm._v(" "), _c('option', [_vm._v("06")]), _vm._v(" "), _c('option', [_vm._v("07")]), _vm._v(" "), _c('option', [_vm._v("08")]), _vm._v(" "), _c('option', [_vm._v("09")]), _vm._v(" "), _c('option', [_vm._v("10")]), _vm._v(" "), _c('option', [_vm._v("11")]), _vm._v(" "), _c('option', [_vm._v("12")]), _vm._v(" "), _c('option', [_vm._v("13")]), _vm._v(" "), _c('option', [_vm._v("14")]), _vm._v(" "), _c('option', [_vm._v("15")]), _vm._v(" "), _c('option', [_vm._v("16")]), _vm._v(" "), _c('option', [_vm._v("17")]), _vm._v(" "), _c('option', [_vm._v("18")]), _vm._v(" "), _c('option', [_vm._v("19")]), _vm._v(" "), _c('option', [_vm._v("20")]), _vm._v(" "), _c('option', [_vm._v("21")]), _vm._v(" "), _c('option', [_vm._v("22")]), _vm._v(" "), _c('option', [_vm._v("23")]), _vm._v(" "), _c('option', [_vm._v("24")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary btn-danger",
+    attrs: {
+      "href": "/dashboard",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Cancel")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-primary btn-success",
+    attrs: {
+      "data-dismiss": "modal",
+      "href": "/dashboard"
+    },
+    on: {
+      "click": function($event) {
+        _vm.createShifts(_vm.day, _vm.start, _vm.end)
+      }
+    }
+  }, [_vm._v("Add Employee")])])])])])]), _vm._v(" "), _vm._m(2)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     staticClass: "btn pull-right btn-xs btn-primary",
     attrs: {
-      "href": "#"
+      "data-toggle": "modal",
+      "href": "#addShift"
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-plus"
-  })])])
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add Shift")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-body"
+  }, [_c('canvas', {
+    attrs: {
+      "id": "mon",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "tue",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "wed",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "thur",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "fri",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "sat",
+      "height": "30"
+    }
+  }), _vm._v(" "), _c('canvas', {
+    attrs: {
+      "id": "sun",
+      "height": "30"
+    }
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

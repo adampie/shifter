@@ -5,40 +5,42 @@
       </div>
         <div
       <div class="panel-body">
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
-        <div style="height: 50px;">
-
-        </div>
-        <hr>
       </div>
   </div>
 </div>
 </template>
 
 <script>
+export default {
+        data() {
+          return {
+            shiftworkers: [],
+          }
+        },
+
+         mounted() {
+           this.readShiftWorkers()
+         },
+
+        methods: {
+          createShiftWorkers () {
+            axios.post('/api/v1/shiftworker/adam/pie');
+          },
+          readShiftWorkers () {
+            axios.get('/api/v1/shiftworker').then( response => {
+              if(response.data.length != 0){
+                this.shiftworkers = response.data
+              }
+            });
+          },
+          updateShiftWorkers () {
+            axios.post('/api/v1/shiftworker/1/a/p');
+          },
+          deleteShiftWorkers () {
+            axios.post('/api/v1/shiftworker/1');
+          }
+        }
+      }
 </script>
 
 <style lang="css">
