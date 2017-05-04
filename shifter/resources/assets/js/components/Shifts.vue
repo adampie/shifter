@@ -86,7 +86,7 @@
       </div>
       <div class="modal-footer">
         <a href="/dashboard" data-dismiss="modal" class="btn btn-primary btn-danger">Cancel</a>
-        <a @click="createShifts(day,start,end)" data-dismiss="modal" href="/dashboard" class="btn btn-primary btn-success">Add Employee</a>
+        <a @click="createShifts(day,start,end)" data-dismiss="modal" href="/dashboard" class="btn btn-primary btn-success">Add Shift</a>
       </div>
     </div>
         </div>

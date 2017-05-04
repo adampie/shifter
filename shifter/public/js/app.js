@@ -2118,11 +2118,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      shiftworkers: []
+      shiftworkers: [],
+      day: null,
+      fname: null,
+      lname: null
     };
   },
   mounted: function mounted() {
@@ -2131,7 +2175,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
-    createShiftWorkers: function createShiftWorkers() {
+    createShiftWorkers: function createShiftWorkers(day, fname, lname) {
       axios.post('/api/v1/shiftworker/adam/pie');
     },
     readShiftWorkers: function readShiftWorkers() {
@@ -5083,7 +5127,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 39 */
@@ -32944,22 +32988,145 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("On Shift\n        "), _c('a', {
+  }, [_vm._v("On Shift\n        "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "addShiftWorkers",
+      "role": "dialog"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog"
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "fname"
+    }
+  }, [_vm._v("Day:")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.day),
+      expression: "day"
+    }],
+    staticClass: "selectpicker",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.day = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', [_vm._v("Monday")]), _vm._v(" "), _c('option', [_vm._v("Tuesday")]), _vm._v(" "), _c('option', [_vm._v("Wednesday")]), _vm._v(" "), _c('option', [_vm._v("Thursday")]), _vm._v(" "), _c('option', [_vm._v("Friday")]), _vm._v(" "), _c('option', [_vm._v("Saturday")]), _vm._v(" "), _c('option', [_vm._v("Sunday")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "fname"
+    }
+  }, [_vm._v("First Name:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fname),
+      expression: "fname"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "fname"
+    },
+    domProps: {
+      "value": (_vm.fname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fname = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": "text"
+    }
+  }, [_vm._v("Last Name:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.lname),
+      expression: "lname"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "lname"
+    },
+    domProps: {
+      "value": (_vm.lname)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.lname = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary btn-danger",
+    attrs: {
+      "href": "/dashboard",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Cancel")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-primary btn-success",
+    attrs: {
+      "data-dismiss": "modal",
+      "href": "/dashboard"
+    },
+    on: {
+      "click": function($event) {
+        _vm.createShiftWorkers(_vm.day, _vm.fname, _vm.lname)
+      }
+    }
+  }, [_vm._v("Add Employee")])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  })])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     staticClass: "btn pull-right btn-xs btn-primary",
     attrs: {
-      "href": "#"
+      "data-toggle": "modal",
+      "href": "#addShiftWorkers"
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-plus"
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
   })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add Shift Workers")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -33121,7 +33288,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.createShifts(_vm.day, _vm.start, _vm.end)
       }
     }
-  }, [_vm._v("Add Employee")])])])])])]), _vm._v(" "), _vm._m(2)])
+  }, [_vm._v("Add Shift")])])])])])]), _vm._v(" "), _vm._m(2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn pull-right btn-xs btn-primary",
